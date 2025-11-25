@@ -1,0 +1,108 @@
+level: INFO
+checks:
+  VAR002:
+    level: WARNING
+builtin_symbols:
+  # todo: extend / generate this with ChatGPT based on the webpage contents
+  "TRUE": BOOLEAN,
+  "FALSE": BOOLEAN,
+  PI: LREAL,
+  AMSPORT_R0_NCSVB: INT,
+  READMODE_ONCE: E_ReadMode,
+  # built-in const https://infosys.beckhoff.com/english.php?content=../content/1033/tcplclib_tc2_mc2/70156683.html&id=
+  # built-in consts: https://infosys.beckhoff.com/english.php?content=../content/1033/tcplclib_tc2_system/31030539.html&id=
+  ADSLOG_MSGTYPE_ERROR: INT,
+  ADSLOG_MSGTYPE_WARN: INT,
+  ADSLOG_MSGTYPE_HINT: INT,
+  S_OK: INT,
+  # built-in enum https://infosys.beckhoff.com/english.php?content=../content/1033/tf7xxx_tc3_vision/2334733579.html&id=
+  DEFAULT_ADS_TIMEOUT: TIME,
+  # built-in const https://infosys.beckhoff.com/english.php?content=../content/1033/tf6100_tc3_opcua_client/537644171.html&id=
+  EC_DEVICE_STATE_OP: BYTE,
+  # built-in const https://infosys.beckhoff.com/english.php?content=../content/1033/tcplclibethercat/11934856843.html&id=
+  # built-in enum https://infosys.beckhoff.com/english.php?content=../content/1033/tcplclib_tc2_mc2/70147595.html&id=
+  MC_Buffered: MC_BufferMode,
+  MC_Aborting: MC_BufferMode,
+  # built-in consts? https://infosys.beckhoff.com/english.php?content=../content/1033/tcplclib_tc2_system/30977547.html&id=
+  FOPEN_MODEWRITE: INT,
+  FOPEN_MODEAPPEND: INT,
+  PATH_GENERIC: INT,
+  # built-in enum https://infosys.beckhoff.com/english.php?content=../content/1033/tf6340_tc3_serial_communication/85947659.html&id=
+  COMERROR_NOERROR: ComError_t,
+  COMERROR_INVALIDPOINTER: ComError_t,
+  PlcTaskSystemInfo: <type>,  # obviously, this will not be a valid type that can be found
+builtin_functions:
+  - TRUNC
+  - DINT_TO_UINT
+  - MEMCPY
+  - MEMMOVE
+  - MEMSET
+  - __QUERYINTERFACE
+  - CONCAT2
+  - STRNCPY
+  - ADSLOGSTR
+block_prefixes:
+  VAR:
+    # todo: these top two are only valid if the variables are function block fields
+    - s_
+    - ps_  # todo: check if it is actually linked to a property
+    - ""
+  VAR_INPUT: i_
+  VAR_OUTPUT: q_
+  VAR_INST: s_
+  VAR_TEMP: t_
+array_prefix: a
+reference_prefix: r
+function_block_prefix: fb
+interface_prefix: itf
+enum_prefix: e
+struct_prefix: st
+type_prefixes:
+  BOOL: b
+  WORD: n
+  LWORD: n
+  DWORD: n
+  BYTE: n
+  SINT: n
+  INT: n
+  DINT: n
+  LINT: n
+  USINT: n
+  UINT: n
+  UDINT: n
+  ULINT: n
+  REAL: f
+  LREAL: f
+  FLOAT: f
+  LTIME: tm
+  TIME: tm
+  T_DCTIME64: dt
+  DCTIMESTRUCT: s
+  TIMESTRUCT: st
+  T_MaxString: s
+  STRING: s
+  HRESULT: hr
+  R_TRIG: osr
+  F_TRIG: osf
+  FB_TON: ton
+  FB_TOF: tof
+  "^STRING\\(.*\\)$": s  # sized string
+  "T_MAXSTRING": s
+  "^FBG?_\\w*$": fb
+  "^ITFG?_\\w*$": itf
+  "^EG?_\\w*$": e
+  "^ST_\\w*$": st
+  "^POINTER TO \\w+$": p
+  "PVOID": p
+  "ANY": x
+  # these get a bit more hacky:
+  "^MC_\\w+$": fb
+  "^IOF_\\w+$": fb
+  "ADSWRITE": fb
+  "__SYSTEM.AnyType": any
+  "EPlcMappingStatus": e
+nameless_arg_functions:
+  - __QUERYINTERFACE
+  - CONCAT2
+  - F_CallMain
+nameless_arg_methods: []
