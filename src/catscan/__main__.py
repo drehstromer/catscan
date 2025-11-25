@@ -143,7 +143,9 @@ def lint_(
         files |= set(map(Path, glob.glob(pattern, root_dir=root_dir, recursive=True)))
 
     files = {
-        file for file in files if not any(fnmatch.fnmatch(str(file), excl) for excl in excludes)
+        root_dir / file
+        for file in files
+        if not any(fnmatch.fnmatch(str(file), excl) for excl in excludes)
     }
 
     logger.info(
